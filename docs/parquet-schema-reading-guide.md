@@ -1,29 +1,5 @@
 # Spark Parquet Schema Reading In Depth
 
-## Table of Contents
-
-- [1. Overview](#1-overview)
-- [2. Three Schema Resolution Modes](#2-three-schema-resolution-modes)
-  - [2.1 User-Specified Schema](#21-user-specified-schema)
-  - [2.2 Automatic Inference (Default)](#22-automatic-inference-default)
-  - [2.3 Merge Inference](#23-merge-inference)
-- [3. Schema Inference In Detail](#3-schema-inference-in-detail)
-  - [3.1 Schema Information Inside Parquet Files](#31-schema-information-inside-parquet-files)
-  - [3.2 File Selection Strategy](#32-file-selection-strategy)
-  - [3.3 Schema Extraction Priority](#33-schema-extraction-priority)
-  - [3.4 Parquet-to-Spark Type Mapping](#34-parquet-to-spark-type-mapping)
-- [4. Schema Merging In Detail](#4-schema-merging-in-detail)
-  - [4.1 When It Triggers](#41-when-it-triggers)
-  - [4.2 Merge Workflow](#42-merge-workflow)
-  - [4.3 Merge Algorithm](#43-merge-algorithm)
-  - [4.4 Handling Heterogeneous Schemas](#44-handling-heterogeneous-schemas)
-  - [4.5 Read Behavior After Merging](#45-read-behavior-after-merging)
-- [5. Scenario Behavior Matrix](#5-scenario-behavior-matrix)
-- [6. Configuration Reference](#6-configuration-reference)
-- [7. Performance and Best Practices](#7-performance-and-best-practices)
-
----
-
 ## 1. Overview
 
 When reading Parquet files, Spark must first determine the schema of the data (column names, column types, nullability, etc.). How the schema is resolved directly affects both read performance and correctness.
